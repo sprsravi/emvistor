@@ -7,6 +7,7 @@ const convertApiVisitor = (apiVisitor: ApiVisitor): Visitor => ({
   id: apiVisitor.id.toString(),
   name: apiVisitor.name,
   company: apiVisitor.company,
+  department: apiVisitor.department,
   purpose: apiVisitor.purpose,
   phone: apiVisitor.phone,
   email: apiVisitor.email,

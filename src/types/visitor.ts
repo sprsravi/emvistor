@@ -2,6 +2,7 @@ export interface Visitor {
   id: string;
   name: string;
   company: string;
+  department: string;
   purpose: string;
   phone: string;
   email: string;

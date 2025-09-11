@@ -6,6 +6,7 @@ class Visitor {
     const {
       name,
       company,
+      department,
       purpose,
       phone,
       email,
@@ -14,12 +15,12 @@ class Visitor {
     } = visitorData;
 
     const query = `
-      INSERT INTO visitors (name, company, purpose, phone, email, host, check_in_time, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, 'checked-in')
+      INSERT INTO visitors (name, company, department, purpose, phone, email, host, check_in_time, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'checked-in')
     `;
 
     const [result] = await connection.execute(query, [
-      name, company, purpose, phone, email, host, checkInTime
+      name, company, department, purpose, phone, email, host, checkInTime
     ]);
 
     return {
@@ -37,6 +38,7 @@ class Visitor {
         id,
         name,
         company,
+        department,
         purpose,
         phone,
         email,
@@ -60,6 +62,7 @@ class Visitor {
         id,
         name,
         company,
+        department,
         purpose,
         phone,
         email,

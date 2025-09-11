@@ -4,6 +4,7 @@ export interface ApiVisitor {
   id: number;
   name: string;
   company: string;
+  department: string;
   purpose: string;
   phone: string;
   email: string;
