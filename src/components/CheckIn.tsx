@@ -118,20 +118,19 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
               >
                 <option value="">Select department</option>
+                <option value="Administration">Administration</option>
                 <option value="Bluesky">Bluesky</option>
                 <option value="Consulting Division">Consulting Division</option>
                 <option value="Customer Support">Customer Support</option>
                 <option value="ESS Sales">ESS Sales</option>
                 <option value="ESS Technology">ESS Technology</option>
-                <option value="Finance">Finance</option>
+                <option value="finance">finance</option>
                 <option value="Foreign employee">Foreign employee</option>
                 <option value="GRC">GRC</option>
                 <option value="HR">HR</option>
-                <option value="IAF data">IAF data</option>
                 <option value="Inside Sales">Inside Sales</option>
                 <option value="International Team">International Team</option>
                 <option value="IT-Infrastructure">IT-Infrastructure</option>
-                <option value="iwd_mail_backup">iwd_mail_backup</option>
                 <option value="Marketing">Marketing</option>
                 <option value="Operation">Operation</option>
                 <option value="Technology">Technology</option>

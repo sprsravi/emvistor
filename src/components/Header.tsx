@@ -9,9 +9,9 @@ const Header: React.FC = () => {
             <img 
               src="/image.png" 
               alt="emudhra" 
-              className="h-10 w-auto"
+              className="h-12 w-auto drop-shadow-md"
             />
-            <h1 className="text-2xl font-bold text-gray-900">Visitor Manager</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Visitor Management</h1>
           </div>
           <div className="text-sm text-gray-500">
             {new Date().toLocaleDateString('en-US', { 
