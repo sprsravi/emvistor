@@ -52,7 +52,6 @@ function App() {
           <VisitorList
             visitors={visitors}
             onCheckOut={checkOutVisitor}
-            onDelete={deleteVisitor}
           />
         );
       case 'history':

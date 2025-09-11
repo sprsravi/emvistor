@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Search, Filter, Trash2, UserCheck, UserX } from 'lucide-react';
+import { Search, Filter, UserCheck, UserX } from 'lucide-react';
 import { Visitor } from '../types/visitor';
 
 interface VisitorListProps {
   visitors: Visitor[];
   onCheckOut: (id: string) => void;
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 
 const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelete }) => {
@@ -139,13 +139,6 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                           Check Out
                         </button>
                       )}
-                      <button
-                        onClick={() => onDelete(visitor.id)}
-                        className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors duration-200 inline-flex items-center"
-                      >
-                        <Trash2 className="w-3 h-3 mr-1" />
-                        Delete
-                      </button>
                     </td>
                   </tr>
                 ))}
