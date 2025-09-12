@@ -9,6 +9,17 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3001',
+    'https://yourdomain.com',
+    // Add your domain here
+    // 'https://visitor.emudhra.com',
+    // 'http://192.168.1.100:3001'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
