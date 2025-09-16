@@ -6,18 +6,27 @@ const visitorRoutes = require('./routes/visitors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Load environment-specific configuration
+if (NODE_ENV === 'production') {
+  require('dotenv').config({ path: '.env.production' });
+}
 
 // Middleware
 app.use(cors());
+
+// Configure CORS based on environment
+const corsOrigins = NODE_ENV === 'production' 
+  ? (process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : ['https://visitor.emudhra.com'])
+  : [
+      'http://localhost:5173',
+      'http://localhost:3001',
+      'http://127.0.0.1:5173'
+    ];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3001',
-    'https://yourdomain.com',
-    // Add your domain here
-    // 'https://visitor.emudhra.com',
-    // 'http://192.168.1.100:3001'
-  ],
+  origin: corsOrigins,
   credentials: true
 }));
 app.use(express.json());

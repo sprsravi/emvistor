@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:full": "npm run build && npm run build:backend",
-    "build:backend": "cd backend && npm install",
+    "build:production": "NODE_ENV=production npm run build",
+    "build:full": "npm run build:production && npm run build:backend",
+    "build:backend": "cd backend && npm install --production",
     "lint": "eslint .",
     "preview": "vite preview",
     "start:backend": "cd backend && npm start",
     "start:dev": "concurrently \"npm run dev\" \"npm run start:backend\"",
-    "start": "npm run start:dev"
+    "start": "npm run start:dev",
+    "start:production": "NODE_ENV=production npm run build:full && cd backend && NODE_ENV=production npm start"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",

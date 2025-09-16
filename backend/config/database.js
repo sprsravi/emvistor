@@ -1,11 +1,11 @@
 const mysql = require('mysql2/promise');
 
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: '', // Default XAMPP MySQL password is empty
-  database: 'visitor_management',
-  port: 3306
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '', // Default XAMPP MySQL password is empty
+  database: process.env.DB_NAME || 'visitor_management',
+  port: process.env.DB_PORT || 3306
 };
 
 let connection;
