@@ -22,7 +22,11 @@ const corsOrigins = NODE_ENV === 'production'
   : [
       'http://localhost:5173',
       'http://localhost:3001',
-      'http://127.0.0.1:5173'
+      'http://127.0.0.1:5173',
+      'http://192.168.1.10:3001',
+      'http://visitor-emudhra.local:3001',
+      'http://192.168.1.10',
+      'http://visitor-emudhra.local'
     ];
 
 app.use(cors({
