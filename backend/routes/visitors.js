@@ -70,7 +70,7 @@ router.get('/export/csv', async (req, res) => {
     
     // CSV headers
     const headers = [
-      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 
+      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 'ID Type', 'ID Number',
       'Host', 'Check-in Time', 'Check-out Time', 'Status', 'Duration (minutes)'
     ];
     
@@ -90,6 +90,8 @@ router.get('/export/csv', async (req, res) => {
         visitor.purpose,
         visitor.phone,
         visitor.email || '',
+        visitor.idType || '',
+        visitor.idNumber || '',
         visitor.host,
         checkInTime.toLocaleString(),
         checkOutTime ? checkOutTime.toLocaleString() : 'Not checked out',

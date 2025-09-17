@@ -15,6 +15,8 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
     phone: '',
     email: '',
     host: '',
+    idType: '',
+    idNumber: '',
   });
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -29,6 +31,8 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
       phone: '',
       email: '',
       host: '',
+      idType: '',
+      idNumber: '',
     });
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
@@ -167,6 +171,53 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                 placeholder="Enter email address"
               />
+            </div>
+
+            <div>
+              <label htmlFor="idType" className="block text-sm font-medium text-gray-700 mb-2">
+                Identity Document Type
+              </label>
+              <select
+                id="idType"
+                name="idType"
+                value={formData.idType}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+              >
+                <option value="">Select ID type (Optional)</option>
+                <option value="aadhaar">Aadhaar Card</option>
+                <option value="pan">PAN Card</option>
+                <option value="driving_license">Driving License</option>
+                <option value="passport">Passport</option>
+                <option value="voter_id">Voter ID</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="idNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                Identity Document Number
+              </label>
+              <input
+                type="text"
+                id="idNumber"
+                name="idNumber"
+                value={formData.idNumber}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                placeholder="Enter ID number"
+                disabled={!formData.idType}
+              />
+              {formData.idType && (
+                <p className="text-xs text-gray-500 mt-1">
+                  {formData.idType === 'aadhaar' && 'Enter 12-digit Aadhaar number'}
+                  {formData.idType === 'pan' && 'Enter 10-character PAN number (e.g., ABCDE1234F)'}
+                  {formData.idType === 'driving_license' && 'Enter driving license number'}
+                  {formData.idType === 'passport' && 'Enter passport number'}
+                  {formData.idType === 'voter_id' && 'Enter voter ID number'}
+                  {formData.idType === 'other' && 'Enter ID number'}
+                </p>
+              )}
             </div>
           </div>
 

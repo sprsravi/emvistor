@@ -9,6 +9,9 @@ export interface ApiVisitor {
   phone: string;
   email: string;
   host: string;
+  idType?: string;
+  idNumber?: string;
+  idVerified?: boolean;
   checkInTime: string;
   checkOutTime?: string;
   status: 'checked-in' | 'checked-out';

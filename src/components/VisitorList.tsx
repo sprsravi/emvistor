@@ -83,6 +83,9 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                     Host
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Identity
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -111,6 +114,25 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {visitor.host}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {visitor.idType && visitor.idNumber ? (
+                        <div>
+                          <div className="text-xs font-medium text-gray-700 uppercase">
+                            {visitor.idType.replace('_', ' ')}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {visitor.idType === 'aadhaar' 
+                              ? `****-****-${visitor.idNumber.slice(-4)}`
+                              : visitor.idType === 'pan'
+                              ? `${visitor.idNumber.slice(0, 3)}****${visitor.idNumber.slice(-1)}`
+                              : `****${visitor.idNumber.slice(-4)}`
+                            }
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-gray-400">Not provided</span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span

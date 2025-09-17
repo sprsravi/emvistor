@@ -11,16 +11,18 @@ class Visitor {
       phone,
       email,
       host,
+      idType,
+      idNumber,
       checkInTime = new Date()
     } = visitorData;
 
     const query = `
-      INSERT INTO visitors (name, company, department, purpose, phone, email, host, check_in_time, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'checked-in')
+      INSERT INTO visitors (name, company, department, purpose, phone, email, host, id_type, id_number, check_in_time, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'checked-in')
     `;
 
     const [result] = await connection.execute(query, [
-      name, company, department, purpose, phone, email, host, checkInTime
+      name, company, department, purpose, phone, email, host, idType || null, idNumber || null, checkInTime
     ]);
 
     return {
@@ -43,6 +45,9 @@ class Visitor {
         phone,
         email,
         host,
+        id_type as idType,
+        id_number as idNumber,
+        id_verified as idVerified,
         check_in_time as checkInTime,
         check_out_time as checkOutTime,
         status,
@@ -67,6 +72,9 @@ class Visitor {
         phone,
         email,
         host,
+        id_type as idType,
+        id_number as idNumber,
+        id_verified as idVerified,
         check_in_time as checkInTime,
         check_out_time as checkOutTime,
         status,

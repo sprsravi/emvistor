@@ -7,6 +7,9 @@ export interface Visitor {
   phone: string;
   email: string;
   host: string;
+  idType?: 'pan' | 'aadhaar' | 'driving_license' | 'passport' | 'voter_id' | 'other';
+  idNumber?: string;
+  idVerified?: boolean;
   checkInTime: Date;
   checkOutTime?: Date;
   status: 'checked-in' | 'checked-out';
