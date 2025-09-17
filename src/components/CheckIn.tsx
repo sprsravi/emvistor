@@ -175,7 +175,7 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
 
             <div>
               <label htmlFor="idType" className="block text-sm font-medium text-gray-700 mb-2">
-                Identity Document Type
+                Identity Document Type (Any One)
               </label>
               <select
                 id="idType"
@@ -184,7 +184,7 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
               >
-                <option value="">Select ID type (Optional)</option>
+                <option value="">Select any one ID type (Optional)</option>
                 <option value="aadhaar">Aadhaar Card</option>
                 <option value="pan">PAN Card</option>
                 <option value="driving_license">Driving License</option>
@@ -196,7 +196,7 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
 
             <div>
               <label htmlFor="idNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                Identity Document Number
+                Identity Document Number (Any One)
               </label>
               <input
                 type="text"
@@ -205,17 +205,17 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
                 value={formData.idNumber}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                placeholder="Enter ID number"
+                placeholder="Enter any one ID number"
                 disabled={!formData.idType}
               />
               {formData.idType && (
                 <p className="text-xs text-gray-500 mt-1">
-                  {formData.idType === 'aadhaar' && 'Enter 12-digit Aadhaar number'}
-                  {formData.idType === 'pan' && 'Enter 10-character PAN number (e.g., ABCDE1234F)'}
-                  {formData.idType === 'driving_license' && 'Enter driving license number'}
-                  {formData.idType === 'passport' && 'Enter passport number'}
-                  {formData.idType === 'voter_id' && 'Enter voter ID number'}
-                  {formData.idType === 'other' && 'Enter ID number'}
+                  {formData.idType === 'aadhaar' && 'Enter 12-digit Aadhaar number (any one ID is sufficient)'}
+                  {formData.idType === 'pan' && 'Enter 10-character PAN number (any one ID is sufficient)'}
+                  {formData.idType === 'driving_license' && 'Enter driving license number (any one ID is sufficient)'}
+                  {formData.idType === 'passport' && 'Enter passport number (any one ID is sufficient)'}
+                  {formData.idType === 'voter_id' && 'Enter voter ID number (any one ID is sufficient)'}
+                  {formData.idType === 'other' && 'Enter any valid ID number (any one ID is sufficient)'}
                 </p>
               )}
             </div>

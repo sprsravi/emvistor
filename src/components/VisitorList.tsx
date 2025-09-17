@@ -83,7 +83,7 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                     Host
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Identity
+                    Identity (Any One)
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status

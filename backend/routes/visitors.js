@@ -70,7 +70,7 @@ router.get('/export/csv', async (req, res) => {
     
     // CSV headers
     const headers = [
-      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 'ID Type', 'ID Number',
+      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 'ID Type (Any One)', 'ID Number (Any One)',
       'Host', 'Check-in Time', 'Check-out Time', 'Status', 'Duration (minutes)'
     ];
     
