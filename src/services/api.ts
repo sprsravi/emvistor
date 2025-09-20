@@ -9,6 +9,11 @@ export interface ApiVisitor {
   phone: string;
   email: string;
   host: string;
+  location?: string;
+  appointmentWith?: string;
+  appointmentTime?: string;
+  hasElectronicDevices?: boolean;
+  electronicDevicesList?: string;
   idType?: string;
   idNumber?: string;
   idVerified?: boolean;

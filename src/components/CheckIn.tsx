@@ -15,6 +15,11 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
     phone: '',
     email: '',
     host: '',
+    location: '',
+    appointmentWith: '',
+    appointmentTime: '',
+    hasElectronicDevices: false,
+    electronicDevicesList: '',
     idType: '',
     idNumber: '',
   });
@@ -31,6 +36,11 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
       phone: '',
       email: '',
       host: '',
+      location: '',
+      appointmentWith: '',
+      appointmentTime: '',
+      hasElectronicDevices: false,
+      electronicDevicesList: '',
       idType: '',
       idNumber: '',
     });
@@ -39,9 +49,12 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -219,6 +232,83 @@ const CheckIn: React.FC<CheckInProps> = ({ onAddVisitor }) => {
                 </p>
               )}
             </div>
+
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                Location/Floor/Room
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                placeholder="Enter location, floor, or room number"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="appointmentWith" className="block text-sm font-medium text-gray-700 mb-2">
+                Appointment With
+              </label>
+              <input
+                type="text"
+                id="appointmentWith"
+                name="appointmentWith"
+                value={formData.appointmentWith}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                placeholder="Enter person you have appointment with"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="appointmentTime" className="block text-sm font-medium text-gray-700 mb-2">
+                Appointment Time
+              </label>
+              <input
+                type="datetime-local"
+                id="appointmentTime"
+                name="appointmentTime"
+                value={formData.appointmentTime}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <input
+                type="checkbox"
+                id="hasElectronicDevices"
+                name="hasElectronicDevices"
+                checked={formData.hasElectronicDevices}
+                onChange={handleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="hasElectronicDevices" className="text-sm font-medium text-gray-700">
+                Are you carrying any electronic devices?
+              </label>
+            </div>
+
+            {formData.hasElectronicDevices && (
+              <div>
+                <label htmlFor="electronicDevicesList" className="block text-sm font-medium text-gray-700 mb-2">
+                  List of Electronic Devices
+                </label>
+                <textarea
+                  id="electronicDevicesList"
+                  name="electronicDevicesList"
+                  rows={3}
+                  value={formData.electronicDevicesList}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                  placeholder="Please list the electronic devices you are carrying (e.g., laptop, mobile phone, tablet, camera, etc.)"
+                />
+              </div>
+            )}
           </div>
 
           <div>

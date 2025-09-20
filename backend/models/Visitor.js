@@ -2,7 +2,7 @@ const { getConnection } = require('../config/database');
 
 class Visitor {
   static async create(visitorData) {
-    const connection = getConnection();
+    const pool = getConnection();
     const {
       name,
       company,
@@ -11,18 +11,26 @@ class Visitor {
       phone,
       email,
       host,
+      location,
+      appointmentWith,
+      appointmentTime,
+      hasElectronicDevices,
+      electronicDevicesList,
       idType,
       idNumber,
       checkInTime = new Date()
     } = visitorData;
 
     const query = `
-      INSERT INTO visitors (name, company, department, purpose, phone, email, host, id_type, id_number, check_in_time, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'checked-in')
+      INSERT INTO visitors (name, company, department, purpose, phone, email, host, location, appointment_with, appointment_time, has_electronic_devices, electronic_devices_list, id_type, id_number, check_in_time, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'checked-in')
     `;
 
-    const [result] = await connection.execute(query, [
-      name, company, department, purpose, phone, email, host, idType || null, idNumber || null, checkInTime
+    const [result] = await pool.execute(query, [
+      name, company, department, purpose, phone, email, host, 
+      location || null, appointmentWith || null, appointmentTime || null,
+      hasElectronicDevices || false, electronicDevicesList || null,
+      idType || null, idNumber || null, checkInTime
     ]);
 
     return {
@@ -34,7 +42,7 @@ class Visitor {
   }
 
   static async findAll() {
-    const connection = getConnection();
+    const pool = getConnection();
     const query = `
       SELECT 
         id,
@@ -45,6 +53,11 @@ class Visitor {
         phone,
         email,
         host,
+        location,
+        appointment_with as appointmentWith,
+        appointment_time as appointmentTime,
+        has_electronic_devices as hasElectronicDevices,
+        electronic_devices_list as electronicDevicesList,
         id_type as idType,
         id_number as idNumber,
         id_verified as idVerified,
@@ -56,12 +69,12 @@ class Visitor {
       ORDER BY check_in_time DESC
     `;
 
-    const [rows] = await connection.execute(query);
+    const [rows] = await pool.execute(query);
     return rows;
   }
 
   static async findById(id) {
-    const connection = getConnection();
+    const pool = getConnection();
     const query = `
       SELECT 
         id,
@@ -72,6 +85,11 @@ class Visitor {
         phone,
         email,
         host,
+        location,
+        appointment_with as appointmentWith,
+        appointment_time as appointmentTime,
+        has_electronic_devices as hasElectronicDevices,
+        electronic_devices_list as electronicDevicesList,
         id_type as idType,
         id_number as idNumber,
         id_verified as idVerified,
@@ -83,12 +101,12 @@ class Visitor {
       WHERE id = ?
     `;
 
-    const [rows] = await connection.execute(query, [id]);
+    const [rows] = await pool.execute(query, [id]);
     return rows[0];
   }
 
   static async checkOut(id) {
-    const connection = getConnection();
+    const pool = getConnection();
     const checkOutTime = new Date();
     
     const query = `
@@ -97,39 +115,39 @@ class Visitor {
       WHERE id = ?
     `;
 
-    await connection.execute(query, [checkOutTime, id]);
+    await pool.execute(query, [checkOutTime, id]);
     return this.findById(id);
   }
 
   static async delete(id) {
-    const connection = getConnection();
+    const pool = getConnection();
     const query = 'DELETE FROM visitors WHERE id = ?';
-    const [result] = await connection.execute(query, [id]);
+    const [result] = await pool.execute(query, [id]);
     return result.affectedRows > 0;
   }
 
   static async getStats() {
-    const connection = getConnection();
+    const pool = getConnection();
     
     // Get total visitors
-    const [totalResult] = await connection.execute('SELECT COUNT(*) as count FROM visitors');
+    const [totalResult] = await pool.execute('SELECT COUNT(*) as count FROM visitors');
     const totalVisitors = totalResult[0].count;
 
     // Get currently in office
-    const [currentResult] = await connection.execute(
+    const [currentResult] = await pool.execute(
       "SELECT COUNT(*) as count FROM visitors WHERE status = 'checked-in'"
     );
     const currentlyInOffice = currentResult[0].count;
 
     // Get today's stats
     const today = new Date().toISOString().split('T')[0];
-    const [todayResult] = await connection.execute(
+    const [todayResult] = await pool.execute(
       'SELECT COUNT(*) as count FROM visitors WHERE DATE(check_in_time) = ?',
       [today]
     );
     const totalToday = todayResult[0].count;
 
-    const [checkedOutTodayResult] = await connection.execute(
+    const [checkedOutTodayResult] = await pool.execute(
       "SELECT COUNT(*) as count FROM visitors WHERE DATE(check_in_time) = ? AND status = 'checked-out'",
       [today]
     );

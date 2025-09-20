@@ -83,6 +83,12 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                     Host
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Location
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Electronic Devices
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Identity (Any One)
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -114,6 +120,23 @@ const VisitorList: React.FC<VisitorListProps> = ({ visitors, onCheckOut, onDelet
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {visitor.host}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {visitor.location || '-'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {visitor.hasElectronicDevices ? (
+                        <div>
+                          <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Yes</span>
+                          {visitor.electronicDevicesList && (
+                            <div className="text-xs text-gray-400 mt-1 max-w-32 truncate" title={visitor.electronicDevicesList}>
+                              {visitor.electronicDevicesList}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">No</span>
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {visitor.idType && visitor.idNumber ? (

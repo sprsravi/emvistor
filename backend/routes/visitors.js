@@ -70,8 +70,11 @@ router.get('/export/csv', async (req, res) => {
     
     // CSV headers
     const headers = [
-      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 'ID Type (Any One)', 'ID Number (Any One)',
-      'Host', 'Check-in Time', 'Check-out Time', 'Status', 'Duration (minutes)'
+      'ID', 'Name', 'Company', 'Department', 'Purpose', 'Phone', 'Email', 
+      'Host', 'Location', 'Appointment With', 'Appointment Time',
+      'Has Electronic Devices', 'Electronic Devices List',
+      'ID Type (Any One)', 'ID Number (Any One)',
+      'Check-in Time', 'Check-out Time', 'Status', 'Duration (minutes)'
     ];
     
     // Convert visitors to CSV format
@@ -93,6 +96,10 @@ router.get('/export/csv', async (req, res) => {
         visitor.idType || '',
         visitor.idNumber || '',
         visitor.host,
+        visitor.location || '',
+        visitor.appointmentWith || '',
+        visitor.appointmentTime ? new Date(visitor.appointmentTime).toLocaleString() : '',
+        visitor.hasElectronicDevices ? 'Yes' : 'No',
         checkInTime.toLocaleString(),
         checkOutTime ? checkOutTime.toLocaleString() : 'Not checked out',
         visitor.status,

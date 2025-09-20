@@ -7,6 +7,11 @@ export interface Visitor {
   phone: string;
   email: string;
   host: string;
+  location?: string;
+  appointmentWith?: string;
+  appointmentTime?: Date;
+  hasElectronicDevices?: boolean;
+  electronicDevicesList?: string;
   idType?: 'pan' | 'aadhaar' | 'driving_license' | 'passport' | 'voter_id' | 'other';
   idNumber?: string;
   idVerified?: boolean;
