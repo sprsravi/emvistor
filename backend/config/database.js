@@ -10,12 +10,9 @@ const dbConfig = {
   connectionLimit: 10,
   acquireTimeout: 60000,
   timeout: 60000,
-  reconnect: true,
   // Keep connection alive
-  keepAliveInitialDelay: 0,
-  enableKeepAlive: true,
-  // Handle disconnections
-  handleDisconnects: true
+  idleTimeout: 300000, // 5 minutes
+  maxIdle: 10
 };
 
 let pool;
@@ -38,7 +35,7 @@ const connectDB = async () => {
       console.error('Database pool error:', err);
       if(err.code === 'PROTOCOL_CONNECTION_LOST') {
         console.log('Reconnecting to database...');
-        connectDB();
+        // Pool will automatically handle reconnection
       } else {
         throw err;
       }
