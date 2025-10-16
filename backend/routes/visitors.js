@@ -9,7 +9,11 @@ router.get('/', async (req, res) => {
     res.json(visitors);
   } catch (error) {
     console.error('Error fetching visitors:', error);
-    res.status(500).json({ error: 'Failed to fetch visitors' });
+    res.status(500).json({ 
+      error: 'Failed to fetch visitors', 
+      details: error.message,
+      code: error.code 
+    });
   }
 });
 
@@ -20,7 +24,11 @@ router.get('/stats', async (req, res) => {
     res.json(stats);
   } catch (error) {
     console.error('Error fetching stats:', error);
-    res.status(500).json({ error: 'Failed to fetch stats' });
+    res.status(500).json({ 
+      error: 'Failed to fetch stats', 
+      details: error.message,
+      code: error.code 
+    });
   }
 });
 
@@ -31,7 +39,11 @@ router.post('/', async (req, res) => {
     res.status(201).json(visitor);
   } catch (error) {
     console.error('Error creating visitor:', error);
-    res.status(500).json({ error: 'Failed to create visitor' });
+    res.status(500).json({ 
+      error: 'Failed to create visitor', 
+      details: error.message,
+      code: error.code 
+    });
   }
 });
 
@@ -45,7 +57,11 @@ router.put('/:id/checkout', async (req, res) => {
     res.json(visitor);
   } catch (error) {
     console.error('Error checking out visitor:', error);
-    res.status(500).json({ error: 'Failed to check out visitor' });
+    res.status(500).json({ 
+      error: 'Failed to check out visitor', 
+      details: error.message,
+      code: error.code 
+    });
   }
 });
 
@@ -59,7 +75,11 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Visitor deleted successfully' });
   } catch (error) {
     console.error('Error deleting visitor:', error);
-    res.status(500).json({ error: 'Failed to delete visitor' });
+    res.status(500).json({ 
+      error: 'Failed to delete visitor', 
+      details: error.message,
+      code: error.code 
+    });
   }
 });
 

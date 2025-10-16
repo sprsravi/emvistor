@@ -56,13 +56,19 @@ app.get('*', (req, res) => {
 const startServer = async () => {
   try {
     await connectDB();
+    
+    // Add a small delay to ensure pool is ready
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
       console.log(`API available at http://localhost:${PORT}/api`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
-    process.exit(1);
+    // Don't exit, retry connection
+    console.log('Retrying database connection in 5 seconds...');
+    setTimeout(startServer, 5000);
   }
 };
 
